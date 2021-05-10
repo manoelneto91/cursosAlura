@@ -2,15 +2,14 @@
 
 namespace Alura\Banco\Modelo\Conta;
 
-use Alura\Banco\Modelo\Conta\Titular;
-use Alura\Banco\Modelo\Endereco;
-use Alura\Banco\Modelo\CPF;
-use Alura\Banco\Modelo\Conta\Conta;
+use Alura\Banco\Modelo\Conta\{ContaPoupanca, ContaCorrente, Titular};
+use Alura\Banco\Modelo\{CPF, Endereco};
+
 
 require_once 'autoload.php';
 
 $endereco = new Endereco('João da Silva', '123', 'Jardim Velho', 'Guaçu');
-$manoel = new Titular(new Cpf('123.456.789-01'),'Manoel', $endereco);
+$manoel = new Titular(new Cpf('123.456.789-10'),'Manoel', $endereco);
 $primeiraConta = new ContaCorrente($manoel);
 $primeiraConta ->deposita(100);
 $primeiraConta ->saca(30);
