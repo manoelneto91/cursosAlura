@@ -1,0 +1,9 @@
+az
+
+az group list - mostra a lista de recursos
+az group create --location westus --resource goup labAzCli- cria um grupo de recursos 
+az vm create -n MinhaVm -g labAzCli --image UbuntuLTS - Cria uma VM ubuntu no grupo criado
+az vm create -n MinhaVm -g labAzCli --image UbuntuLTS --generate-ssh-keys - gera as chaves SSH para conexão com a maquina
+ssh + ip - conecta na VM via ssh
+az group delete --resource-group labAzCli - deleta o grupo de recursos labAzCli
+
