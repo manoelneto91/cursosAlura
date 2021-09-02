@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 
 
 use App\Aluno;
+use App\Http\Requests\AlunosFormRequest;
 use Illuminate\Http\Request;
 
 class AlunosController extends Controller
 {
-    public function listarAlunos()
+    public function listarAlunos(Request $request)
     {
-        $alunos = Aluno::all();
+        $alunos = Aluno::query()->orderBy('nome')->get();
 
-        return view('alunos.index', compact('alunos'));
+        $mensagem = $request->session()->get('mensagem');
+
+        return view('alunos.index', compact('alunos', 'mensagem'));
     }
 
     public function create()
@@ -21,10 +24,18 @@ class AlunosController extends Controller
         return view('alunos.create');
     }
 
-    public function store(Request $request)
+    public function store(AlunosFormRequest $request)
     {
         $aluno = Aluno::create($request->all());
 
-        echo "ALuno criado com ID: {$aluno->id} e nome {$aluno->nome}";
+        $request->session()->flash('mensagem', "Aluno {$aluno->id} adicionado com sucesso {$aluno->nome}");
+        return redirect()->route('listar_alunos');
+    }
+
+    public function destroy(Request $request)
+    {
+        Aluno::destroy($request->id);
+        $request->session()->flash('mensagem', "Aluno removido com sucesso!!!");
+        return redirect()->route('listar_alunos');
     }
 }

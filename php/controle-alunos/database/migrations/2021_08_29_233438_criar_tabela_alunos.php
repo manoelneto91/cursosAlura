@@ -14,7 +14,8 @@ class CriarTabelaAlunos extends Migration
     public function up()
     {
         Schema::create('alunos', function (Blueprint $table) {
-          $table->string('nome');
+            $table->increments('id');
+            $table->string('nome');
         });
     }
 
